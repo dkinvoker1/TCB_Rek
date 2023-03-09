@@ -48,12 +48,13 @@ class _ImagesListPageState extends State<ImagesListPage> {
                       ),
                       itemCount: imageModelList.length,
                       itemBuilder: ((context, index) {
+                        var image = imageModelList[index];
+
                         return InkWell(
                             onTap: () {
-                              showImageDetailDialog(
-                                  context, imageModelList, index);
+                              showImageDetailDialog(context, image);
                             },
-                            child: Image.network(imageModelList[index].url));
+                            child: Image.network(image.thumbnailUrl));
                       }));
             },
           );
@@ -63,7 +64,7 @@ class _ImagesListPageState extends State<ImagesListPage> {
   }
 
   Future<dynamic> showImageDetailDialog(
-      BuildContext context, List<ImageModel> imageModelList, int index) {
+      BuildContext context, ImageModel image) {
     return showDialog(
         context: context,
         builder: (context) {
@@ -73,11 +74,11 @@ class _ImagesListPageState extends State<ImagesListPage> {
               Container(
                 color: Colors.blue,
                 child: Text(
-                  imageModelList[index].title,
+                  image.title,
                   textAlign: TextAlign.center,
                 ),
               ),
-              Image.network(imageModelList[index].url)
+              Image.network(image.url)
             ],
           );
         });
