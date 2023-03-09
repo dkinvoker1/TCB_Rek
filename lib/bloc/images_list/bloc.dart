@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../models/image.dart';
+import '../../models/image/image.dart';
 import '../../repositories/images_repository.dart';
 
 part 'event.dart';

@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:tcb_rek/models/image.dart';
 import 'package:tcb_rek/repositories/interceptor.dart';
+
+import '../models/image/image.dart';
 
 class ImagesRepository {
   final dio = Dio()..interceptors.add(ErrorDisplayInterceptor());

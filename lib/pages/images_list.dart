@@ -2,9 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tcb_rek/models/image.dart';
 
 import '../bloc/images_list/bloc.dart';
+import '../models/image/image.dart';
 
 class ImagesListPage extends StatefulWidget {
   ImagesListPage({Key? key}) : super(key: key);
@@ -30,8 +30,8 @@ class _ImagesListPageState extends State<ImagesListPage> {
                 );
               }
 
-              var imageModelList = snapshot.data!;
-              return imageModelList.isEmpty
+              var imageModelList = snapshot.data;
+              return imageModelList == null || imageModelList.isEmpty
                   ? TextButton(
                       onPressed: () {
                         context
