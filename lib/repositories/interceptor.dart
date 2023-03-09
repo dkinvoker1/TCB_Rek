@@ -6,8 +6,9 @@ class ErrorDisplayInterceptor extends Interceptor {
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) {
     Fluttertoast.showToast(
-        msg:
-            'ERROR[${err.response?.statusCode}] => PATH: ${err.requestOptions.path}',
+        msg: '''ERROR[${err.response?.statusCode}] 
+              ${err.message}
+              PATH: ${err.requestOptions.path}''',
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.CENTER,
         timeInSecForIosWeb: 1,

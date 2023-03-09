@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
-import 'package:tcb_rek/repositories/interceptor.dart';
 
 import '../models/image/image.dart';
+import 'dio_configuration.dart';
 
 class ImagesRepository {
-  final dio = Dio()..interceptors.add(ErrorDisplayInterceptor());
+  final dio = DioConfiguration().getDio();
 
   Future<List<ImageModel>> getFutureImagesList() async {
     Future<Response<List<dynamic>>> response;

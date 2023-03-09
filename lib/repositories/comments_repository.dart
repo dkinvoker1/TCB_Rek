@@ -1,9 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:tcb_rek/models/comment/comment.dart';
-import 'package:tcb_rek/repositories/interceptor.dart';
+
+import 'dio_configuration.dart';
 
 class CommentsRepository {
-  final dio = Dio()..interceptors.add(ErrorDisplayInterceptor());
+  final dio = DioConfiguration().getDio();
 
   Future<List<CommentModel>> getFutureCommentsList() async {
     Future<Response<List<dynamic>>> response;
