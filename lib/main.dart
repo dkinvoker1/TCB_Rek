@@ -16,7 +16,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp.router(
       routerDelegate: _appRouter.delegate(),
       routeInformationParser: _appRouter.defaultRouteParser(),
-      // theme: ThemeData.dark().copyWith(scaffoldBackgroundColor: Colors.black),
+      theme: ThemeData.dark().copyWith(scaffoldBackgroundColor: Colors.black),
     );
   }
 }
