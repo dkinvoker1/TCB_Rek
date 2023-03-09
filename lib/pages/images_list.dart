@@ -32,35 +32,40 @@ class _ImagesListPageState extends State<ImagesListPage> {
 
               var imageModelList = snapshot.data;
               return imageModelList == null || imageModelList.isEmpty
-                  ? TextButton(
-                      onPressed: () {
-                        context
-                            .read<ImagesListBloc>()
-                            .add(ImagesListEvent.load());
-                      },
-                      child: Text('reload'))
-                  : GridView.builder(
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3,
-                        mainAxisSpacing: 1,
-                        crossAxisSpacing: 1,
-                      ),
-                      itemCount: imageModelList.length,
-                      itemBuilder: ((context, index) {
-                        var image = imageModelList[index];
-
-                        return InkWell(
-                            onTap: () {
-                              showImageDetailDialog(context, image);
-                            },
-                            child: Image.network(image.thumbnailUrl));
-                      }));
+                  ? buildReloadButton(context)
+                  : buildImagesGrid(imageModelList);
             },
           );
         },
       ),
     );
+  }
+
+  TextButton buildReloadButton(BuildContext context) {
+    return TextButton(
+        onPressed: () {
+          context.read<ImagesListBloc>().add(ImagesListEvent.load());
+        },
+        child: Text('reload'));
+  }
+
+  GridView buildImagesGrid(List<ImageModel> imageModelList) {
+    return GridView.builder(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+          mainAxisSpacing: 1,
+          crossAxisSpacing: 1,
+        ),
+        itemCount: imageModelList.length,
+        itemBuilder: ((context, index) {
+          var image = imageModelList[index];
+
+          return InkWell(
+              onTap: () {
+                showImageDetailDialog(context, image);
+              },
+              child: Image.network(image.thumbnailUrl));
+        }));
   }
 
   Future<dynamic> showImageDetailDialog(

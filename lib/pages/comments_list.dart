@@ -33,25 +33,31 @@ class _CommentsListPageState extends State<CommentsListPage> {
 
               var commentModelList = snapshot.data;
               return commentModelList == null || commentModelList.isEmpty
-                  ? TextButton(
-                      onPressed: () {
-                        context
-                            .read<CommentsListBloc>()
-                            .add(CommentsListEvent.load());
-                      },
-                      child: Text('reload'))
-                  : ListView.builder(
-                      itemCount: commentModelList.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return CommentMessageWidget(
-                          comment: commentModelList[index],
-                        );
-                      },
-                    );
+                  ? buildReloadButton(context)
+                  : buildCommentList(commentModelList);
             },
           );
         },
       ),
     );
+  }
+
+  ListView buildCommentList(List<CommentModel> commentModelList) {
+    return ListView.builder(
+      itemCount: commentModelList.length,
+      itemBuilder: (BuildContext context, int index) {
+        return CommentMessageWidget(
+          comment: commentModelList[index],
+        );
+      },
+    );
+  }
+
+  TextButton buildReloadButton(BuildContext context) {
+    return TextButton(
+        onPressed: () {
+          context.read<CommentsListBloc>().add(CommentsListEvent.load());
+        },
+        child: Text('reload'));
   }
 }
