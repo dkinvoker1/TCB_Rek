@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../bloc/images_list/bloc.dart';
 import '../models/image/image.dart';
+import '../widgets/network_image_with_refresh.dart';
 
 class ImagesListPage extends StatefulWidget {
   ImagesListPage({Key? key}) : super(key: key);
@@ -49,23 +50,28 @@ class _ImagesListPageState extends State<ImagesListPage> {
         child: Text('reload'));
   }
 
-  GridView buildImagesGrid(List<ImageModel> imageModelList) {
-    return GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
-          mainAxisSpacing: 1,
-          crossAxisSpacing: 1,
-        ),
-        itemCount: imageModelList.length,
-        itemBuilder: ((context, index) {
-          var image = imageModelList[index];
+  Widget buildImagesGrid(List<ImageModel> imageModelList) {
+    return RefreshIndicator(
+      onRefresh: () async {
+        context.read<ImagesListBloc>().add(ImagesListEvent.load());
+      },
+      child: GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+            mainAxisSpacing: 1,
+            crossAxisSpacing: 1,
+          ),
+          itemCount: imageModelList.length,
+          itemBuilder: ((context, index) {
+            var image = imageModelList[index];
 
-          return InkWell(
-              onTap: () {
-                showImageDetailDialog(context, image);
-              },
-              child: Image.network(image.thumbnailUrl));
-        }));
+            return InkWell(
+                onTap: () {
+                  showImageDetailDialog(context, image);
+                },
+                child: Image.network(image.thumbnailUrl));
+          })),
+    );
   }
 
   Future<dynamic> showImageDetailDialog(
@@ -83,7 +89,9 @@ class _ImagesListPageState extends State<ImagesListPage> {
                   textAlign: TextAlign.center,
                 ),
               ),
-              Image.network(image.url)
+              NetworkImageWithRefresh(
+                url: image.url,
+              ),
             ],
           );
         });

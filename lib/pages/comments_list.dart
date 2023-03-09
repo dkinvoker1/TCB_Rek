@@ -42,22 +42,27 @@ class _CommentsListPageState extends State<CommentsListPage> {
     );
   }
 
-  ListView buildCommentList(List<CommentModel> commentModelList) {
-    return ListView.builder(
-      itemCount: commentModelList.length,
-      itemBuilder: (BuildContext context, int index) {
-        return CommentMessageWidget(
-          comment: commentModelList[index],
-        );
-      },
-    );
-  }
-
   TextButton buildReloadButton(BuildContext context) {
     return TextButton(
         onPressed: () {
           context.read<CommentsListBloc>().add(CommentsListEvent.load());
         },
         child: Text('reload'));
+  }
+
+  Widget buildCommentList(List<CommentModel> commentModelList) {
+    return RefreshIndicator(
+      onRefresh: () async {
+        context.read<CommentsListBloc>().add(CommentsListEvent.load());
+      },
+      child: ListView.builder(
+        itemCount: commentModelList.length,
+        itemBuilder: (BuildContext context, int index) {
+          return CommentMessageWidget(
+            comment: commentModelList[index],
+          );
+        },
+      ),
+    );
   }
 }
