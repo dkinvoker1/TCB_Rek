@@ -42,12 +42,27 @@ class _CommentsListPageState extends State<CommentsListPage> {
     );
   }
 
-  TextButton buildReloadButton(BuildContext context) {
-    return TextButton(
-        onPressed: () {
-          context.read<CommentsListBloc>().add(CommentsListEvent.load());
-        },
-        child: Text('reload'));
+  Widget buildReloadButton(BuildContext context) {
+    return RefreshIndicator(
+      onRefresh: () async {
+        context.read<CommentsListBloc>().add(CommentsListEvent.load());
+      },
+      child: SingleChildScrollView(
+        physics: AlwaysScrollableScrollPhysics(),
+        child: SizedBox(
+          height: MediaQuery.of(context).size.height,
+          child: Center(
+            child: TextButton(
+                onPressed: () {
+                  context
+                      .read<CommentsListBloc>()
+                      .add(CommentsListEvent.load());
+                },
+                child: Text('reload')),
+          ),
+        ),
+      ),
+    );
   }
 
   Widget buildCommentList(List<CommentModel> commentModelList) {

@@ -42,12 +42,25 @@ class _ImagesListPageState extends State<ImagesListPage> {
     );
   }
 
-  TextButton buildReloadButton(BuildContext context) {
-    return TextButton(
-        onPressed: () {
-          context.read<ImagesListBloc>().add(ImagesListEvent.load());
-        },
-        child: Text('reload'));
+  Widget buildReloadButton(BuildContext context) {
+    return RefreshIndicator(
+      onRefresh: () async {
+        context.read<ImagesListBloc>().add(ImagesListEvent.load());
+      },
+      child: SingleChildScrollView(
+        physics: AlwaysScrollableScrollPhysics(),
+        child: SizedBox(
+          height: MediaQuery.of(context).size.height,
+          child: Center(
+            child: TextButton(
+                onPressed: () {
+                  context.read<ImagesListBloc>().add(ImagesListEvent.load());
+                },
+                child: Text('reload')),
+          ),
+        ),
+      ),
+    );
   }
 
   Widget buildImagesGrid(List<ImageModel> imageModelList) {
