@@ -6,15 +6,16 @@ class ErrorDisplayInterceptor extends Interceptor {
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) {
     Fluttertoast.showToast(
-        msg: '''ERROR[${err.response?.statusCode}] 
+      msg: '''ERROR[${err.response?.statusCode}] 
               ${err.message}
               PATH: ${err.requestOptions.path}''',
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.CENTER,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
-        fontSize: 16.0);
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.CENTER,
+      timeInSecForIosWeb: 1,
+      backgroundColor: Colors.red,
+      textColor: Colors.white,
+      fontSize: 16.0,
+    );
 
     super.onError(err, handler);
   }

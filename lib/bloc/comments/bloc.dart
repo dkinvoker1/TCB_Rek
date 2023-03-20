@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:tcb_rek/models/comment/comment.dart';
@@ -12,12 +13,14 @@ class CommentsListBloc extends Bloc<CommentsListEvent, CommentsListState> {
   final commentsRepository = CommentsRepository();
 
   CommentsListBloc() : super(_CommentsListState()) {
-    on<_Load>((event, emit) async {
-      var futureCommentsList = commentsRepository.getFutureCommentsList();
+    on<_Load>(_loadHandler);
+  }
 
-      var newState = state.copyWith(futureCommentsList: futureCommentsList);
+  FutureOr<void> _loadHandler(event, emit) async {
+    var commentsList = await commentsRepository.getCommentsList();
 
-      emit.call(newState);
-    });
+    var newState = state.copyWith(commentsList: commentsList);
+
+    emit(newState);
   }
 }

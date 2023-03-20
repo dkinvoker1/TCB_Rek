@@ -164,8 +164,7 @@ abstract class _Load implements CommentsListEvent {
 
 /// @nodoc
 mixin _$CommentsListState {
-  Future<List<CommentModel>>? get futureCommentsList =>
-      throw _privateConstructorUsedError;
+  List<CommentModel>? get commentsList => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CommentsListStateCopyWith<CommentsListState> get copyWith =>
@@ -178,7 +177,7 @@ abstract class $CommentsListStateCopyWith<$Res> {
           CommentsListState value, $Res Function(CommentsListState) then) =
       _$CommentsListStateCopyWithImpl<$Res, CommentsListState>;
   @useResult
-  $Res call({Future<List<CommentModel>>? futureCommentsList});
+  $Res call({List<CommentModel>? commentsList});
 }
 
 /// @nodoc
@@ -194,13 +193,13 @@ class _$CommentsListStateCopyWithImpl<$Res, $Val extends CommentsListState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? futureCommentsList = freezed,
+    Object? commentsList = freezed,
   }) {
     return _then(_value.copyWith(
-      futureCommentsList: freezed == futureCommentsList
-          ? _value.futureCommentsList
-          : futureCommentsList // ignore: cast_nullable_to_non_nullable
-              as Future<List<CommentModel>>?,
+      commentsList: freezed == commentsList
+          ? _value.commentsList
+          : commentsList // ignore: cast_nullable_to_non_nullable
+              as List<CommentModel>?,
     ) as $Val);
   }
 }
@@ -213,7 +212,7 @@ abstract class _$$_CommentsListStateCopyWith<$Res>
       __$$_CommentsListStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Future<List<CommentModel>>? futureCommentsList});
+  $Res call({List<CommentModel>? commentsList});
 }
 
 /// @nodoc
@@ -227,13 +226,13 @@ class __$$_CommentsListStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? futureCommentsList = freezed,
+    Object? commentsList = freezed,
   }) {
     return _then(_$_CommentsListState(
-      futureCommentsList: freezed == futureCommentsList
-          ? _value.futureCommentsList
-          : futureCommentsList // ignore: cast_nullable_to_non_nullable
-              as Future<List<CommentModel>>?,
+      commentsList: freezed == commentsList
+          ? _value.commentsList
+          : commentsList // ignore: cast_nullable_to_non_nullable
+              as List<CommentModel>?,
     ));
   }
 }
@@ -241,14 +240,14 @@ class __$$_CommentsListStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_CommentsListState implements _CommentsListState {
-  _$_CommentsListState({this.futureCommentsList});
+  _$_CommentsListState({this.commentsList});
 
   @override
-  final Future<List<CommentModel>>? futureCommentsList;
+  final List<CommentModel>? commentsList;
 
   @override
   String toString() {
-    return 'CommentsListState(futureCommentsList: $futureCommentsList)';
+    return 'CommentsListState(commentsList: $commentsList)';
   }
 
   @override
@@ -256,12 +255,13 @@ class _$_CommentsListState implements _CommentsListState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_CommentsListState &&
-            (identical(other.futureCommentsList, futureCommentsList) ||
-                other.futureCommentsList == futureCommentsList));
+            const DeepCollectionEquality()
+                .equals(other.commentsList, commentsList));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, futureCommentsList);
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(commentsList));
 
   @JsonKey(ignore: true)
   @override
@@ -272,12 +272,11 @@ class _$_CommentsListState implements _CommentsListState {
 }
 
 abstract class _CommentsListState implements CommentsListState {
-  factory _CommentsListState(
-          {final Future<List<CommentModel>>? futureCommentsList}) =
+  factory _CommentsListState({final List<CommentModel>? commentsList}) =
       _$_CommentsListState;
 
   @override
-  Future<List<CommentModel>>? get futureCommentsList;
+  List<CommentModel>? get commentsList;
   @override
   @JsonKey(ignore: true)
   _$$_CommentsListStateCopyWith<_$_CommentsListState> get copyWith =>

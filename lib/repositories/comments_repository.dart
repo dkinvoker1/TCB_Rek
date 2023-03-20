@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:tcb_rek/models/comment/comment.dart';
 
 import 'dio_configuration.dart';
@@ -6,17 +5,22 @@ import 'dio_configuration.dart';
 class CommentsRepository {
   final dio = DioConfiguration().getDio();
 
-  Future<List<CommentModel>> getFutureCommentsList() async {
-    Future<Response<List<dynamic>>> response;
+  Future<List<CommentModel>> getCommentsList() async {
+    var data = await getData('https://jsonplaceholder.typicode.com/comments');
 
-    response =
-        dio.get<List<dynamic>>('https://jsonplaceholder.typicode.com/comments');
+    if (data != null) {
+      return data.map((e) => CommentModel.fromJson(e)).toList();
+    }
 
-    var futureCommentsList = response.then<List<CommentModel>>((value) {
-      var comments = value.data!.map((e) => CommentModel.fromJson(e)).toList();
-      return comments;
-    }).onError((error, stackTrace) => []);
+    return [];
+  }
 
-    return futureCommentsList;
+  Future<List<dynamic>?> getData(String url) async {
+    try {
+      var response = await dio.get<List<dynamic>>(url);
+      return response.data;
+    } catch (e) {
+      return [];
+    }
   }
 }

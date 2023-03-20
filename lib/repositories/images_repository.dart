@@ -1,22 +1,25 @@
-import 'package:dio/dio.dart';
-
 import '../models/image/image.dart';
 import 'dio_configuration.dart';
 
 class ImagesRepository {
   final dio = DioConfiguration().getDio();
 
-  Future<List<ImageModel>> getFutureImagesList() async {
-    Future<Response<List<dynamic>>> response;
+  Future<List<ImageModel>> getImagesList() async {
+    var data = await getData('https://jsonplaceholder.typicode.com/photos');
 
-    response =
-        dio.get<List<dynamic>>('https://jsonplaceholder.typicode.com/photos');
+    if (data != null) {
+      return data.map((e) => ImageModel.fromJson(e)).toList();
+    }
 
-    var futureImagesList = response.then<List<ImageModel>>((value) {
-      var images = value.data!.map((e) => ImageModel.fromJson(e)).toList();
-      return images;
-    }).onError((error, stackTrace) => []);
+    return [];
+  }
 
-    return futureImagesList;
+  Future<List<dynamic>?> getData(String url) async {
+    try {
+      var response = await dio.get<List<dynamic>>(url);
+      return response.data;
+    } catch (e) {
+      return [];
+    }
   }
 }

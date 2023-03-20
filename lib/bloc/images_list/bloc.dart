@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -12,12 +13,14 @@ class ImagesListBloc extends Bloc<ImagesListEvent, ImagesListState> {
   final imagesRepository = ImagesRepository();
 
   ImagesListBloc() : super(_ImagesListState()) {
-    on<_Load>((event, emit) async {
-      var futureImagesList = imagesRepository.getFutureImagesList();
+    on<_Load>(_loadHandler);
+  }
 
-      var newState = state.copyWith(futureImagesList: futureImagesList);
-
-      emit.call(newState);
-    });
+  FutureOr<void> _loadHandler(event, emit) async {
+    var imagesList = await imagesRepository.getImagesList();
+  
+    var newState = state.copyWith(imagesList: imagesList);
+  
+    emit(newState);
   }
 }

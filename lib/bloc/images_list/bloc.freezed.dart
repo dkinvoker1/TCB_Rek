@@ -164,8 +164,7 @@ abstract class _Load implements ImagesListEvent {
 
 /// @nodoc
 mixin _$ImagesListState {
-  Future<List<ImageModel>>? get futureImagesList =>
-      throw _privateConstructorUsedError;
+  List<ImageModel>? get imagesList => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ImagesListStateCopyWith<ImagesListState> get copyWith =>
@@ -178,7 +177,7 @@ abstract class $ImagesListStateCopyWith<$Res> {
           ImagesListState value, $Res Function(ImagesListState) then) =
       _$ImagesListStateCopyWithImpl<$Res, ImagesListState>;
   @useResult
-  $Res call({Future<List<ImageModel>>? futureImagesList});
+  $Res call({List<ImageModel>? imagesList});
 }
 
 /// @nodoc
@@ -194,13 +193,13 @@ class _$ImagesListStateCopyWithImpl<$Res, $Val extends ImagesListState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? futureImagesList = freezed,
+    Object? imagesList = freezed,
   }) {
     return _then(_value.copyWith(
-      futureImagesList: freezed == futureImagesList
-          ? _value.futureImagesList
-          : futureImagesList // ignore: cast_nullable_to_non_nullable
-              as Future<List<ImageModel>>?,
+      imagesList: freezed == imagesList
+          ? _value.imagesList
+          : imagesList // ignore: cast_nullable_to_non_nullable
+              as List<ImageModel>?,
     ) as $Val);
   }
 }
@@ -213,7 +212,7 @@ abstract class _$$_ImagesListStateCopyWith<$Res>
       __$$_ImagesListStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Future<List<ImageModel>>? futureImagesList});
+  $Res call({List<ImageModel>? imagesList});
 }
 
 /// @nodoc
@@ -227,13 +226,13 @@ class __$$_ImagesListStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? futureImagesList = freezed,
+    Object? imagesList = freezed,
   }) {
     return _then(_$_ImagesListState(
-      futureImagesList: freezed == futureImagesList
-          ? _value.futureImagesList
-          : futureImagesList // ignore: cast_nullable_to_non_nullable
-              as Future<List<ImageModel>>?,
+      imagesList: freezed == imagesList
+          ? _value.imagesList
+          : imagesList // ignore: cast_nullable_to_non_nullable
+              as List<ImageModel>?,
     ));
   }
 }
@@ -241,14 +240,14 @@ class __$$_ImagesListStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_ImagesListState implements _ImagesListState {
-  _$_ImagesListState({this.futureImagesList});
+  _$_ImagesListState({this.imagesList});
 
   @override
-  final Future<List<ImageModel>>? futureImagesList;
+  final List<ImageModel>? imagesList;
 
   @override
   String toString() {
-    return 'ImagesListState(futureImagesList: $futureImagesList)';
+    return 'ImagesListState(imagesList: $imagesList)';
   }
 
   @override
@@ -256,12 +255,13 @@ class _$_ImagesListState implements _ImagesListState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ImagesListState &&
-            (identical(other.futureImagesList, futureImagesList) ||
-                other.futureImagesList == futureImagesList));
+            const DeepCollectionEquality()
+                .equals(other.imagesList, imagesList));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, futureImagesList);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(imagesList));
 
   @JsonKey(ignore: true)
   @override
@@ -271,11 +271,11 @@ class _$_ImagesListState implements _ImagesListState {
 }
 
 abstract class _ImagesListState implements ImagesListState {
-  factory _ImagesListState({final Future<List<ImageModel>>? futureImagesList}) =
+  factory _ImagesListState({final List<ImageModel>? imagesList}) =
       _$_ImagesListState;
 
   @override
-  Future<List<ImageModel>>? get futureImagesList;
+  List<ImageModel>? get imagesList;
   @override
   @JsonKey(ignore: true)
   _$$_ImagesListStateCopyWith<_$_ImagesListState> get copyWith =>
