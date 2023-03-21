@@ -1,8 +1,9 @@
+import '../di/service_locator.dart';
 import '../models/image/image.dart';
-import 'dio_configuration.dart';
+import '../di/dio/dio_configuration.dart';
 
 class ImagesRepository {
-  final dio = DioConfiguration().getDio();
+  final dio = getIt.get<DioConfiguration>().dio;
 
   Future<List<ImageModel>> getImagesList() async {
     var data = await getData('https://jsonplaceholder.typicode.com/photos');
