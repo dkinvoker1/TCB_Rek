@@ -14,8 +14,8 @@
 import 'package:auto_route/auto_route.dart' as _i4;
 import 'package:flutter/material.dart' as _i5;
 
-import '../pages/comments_list.dart' as _i3;
-import '../pages/images_list.dart' as _i2;
+import '../pages/comments_list/comments_list.dart' as _i3;
+import '../pages/images_list/images_list.dart' as _i2;
 import 'main_tab_bar.dart' as _i1;
 
 class AppRouter extends _i4.RootStackRouter {
@@ -39,11 +39,9 @@ class AppRouter extends _i4.RootStackRouter {
       );
     },
     CommentsListRoute.name: (routeData) {
-      final args = routeData.argsAs<CommentsListRouteArgs>(
-          orElse: () => const CommentsListRouteArgs());
       return _i4.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i3.CommentsListPage(key: args.key),
+        child: const _i3.CommentsListPage(),
       );
     },
   };
@@ -108,24 +106,12 @@ class ImagesListRouteArgs {
 
 /// generated route for
 /// [_i3.CommentsListPage]
-class CommentsListRoute extends _i4.PageRouteInfo<CommentsListRouteArgs> {
-  CommentsListRoute({_i5.Key? key})
+class CommentsListRoute extends _i4.PageRouteInfo<void> {
+  const CommentsListRoute()
       : super(
           CommentsListRoute.name,
           path: 'comments-list-page',
-          args: CommentsListRouteArgs(key: key),
         );
 
   static const String name = 'CommentsListRoute';
-}
-
-class CommentsListRouteArgs {
-  const CommentsListRouteArgs({this.key});
-
-  final _i5.Key? key;
-
-  @override
-  String toString() {
-    return 'CommentsListRouteArgs{key: $key}';
-  }
 }
