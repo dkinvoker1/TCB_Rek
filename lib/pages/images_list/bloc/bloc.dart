@@ -2,15 +2,16 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../../data/repositories/repositories.dart';
 import '../../../models/image/image.dart';
-import '../../../repositories/images_repository.dart';
+import '../../../service_locator.dart';
 
 part 'event.dart';
 part 'state.dart';
 part 'bloc.freezed.dart';
 
 class ImagesListBloc extends Bloc<ImagesListEvent, ImagesListState> {
-  final imagesRepository = ImagesRepository();
+  final imagesRepository = serviceLocator<IImagesRepository>();
 
   ImagesListBloc() : super(const ImagesListState.initial()) {
     on<_Load>(_loadHandler);

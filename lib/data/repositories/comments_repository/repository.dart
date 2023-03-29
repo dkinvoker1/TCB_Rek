@@ -1,11 +1,16 @@
 import 'package:tcb_rek/models/comment/comment.dart';
 
-import '../di/dio/dio_configuration.dart';
-import '../di/service_locator.dart';
+import '../../network_config/network_config.dart';
+import '../repositories.dart';
 
-class CommentsRepository {
-  final dio = getIt.get<DioConfiguration>().dio;
+class CommentsRepository implements ICommentsRepository {
+  final INetworkProtocolProvider networkProtocolProvider;
 
+  CommentsRepository(
+    this.networkProtocolProvider,
+  );
+
+  @override
   Future<List<CommentModel>> getCommentsList() async {
     var data = await getData('https://jsonplaceholder.typicode.com/comments');
 
@@ -18,7 +23,7 @@ class CommentsRepository {
 
   Future<List<dynamic>?> getData(String url) async {
     try {
-      var response = await dio.get<List<dynamic>>(url);
+      var response = await networkProtocolProvider.get<List<dynamic>>(url);
       return response.data;
     } catch (e) {
       return [];

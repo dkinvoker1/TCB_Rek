@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'navigation/router.gr.dart';
-import 'di/service_locator.dart';
+import 'service_locator.dart';
 
 void main() {
-  getServices();
+  setUpDependencyInjection();
   runApp(MainApp());
 }
 
